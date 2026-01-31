@@ -15,12 +15,12 @@ for dst, drt in zip(x, dir):
         ans[crr-dst+1:crr+1] = [i+1 for i in ans[crr-dst+1:crr+1]]
         crr -= dst-1
     else:
-        ans[crr:crr+dst] = [i+1000 for i in ans[crr:crr+dst]]
+        ans[crr:crr+dst] = [i+10000 for i in ans[crr:crr+dst]]
         crr += dst-1
 
 for idx, val in enumerate(ans):
-    black = val // 1000
-    white = val % 1000
+    black = val // 10000
+    white = val % 10000
     if val == 0:
         continue
     elif (black >= 2) & (white >= 2):
