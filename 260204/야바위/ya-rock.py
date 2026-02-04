@@ -14,9 +14,4 @@ for (a,b,c) in moves:
 
 ans_stone = max(stone, key=stone.get)
 
-if ans_stone == 'one':
-    print(1)
-elif ans_stone == 'two':
-    print(2)
-else:
-    print(3)
+print(stone[ans_stone])
