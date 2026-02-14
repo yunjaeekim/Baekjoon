@@ -10,22 +10,23 @@ for corr_y in range(min_y, max_y+1):
         if (y1[1] <= corr_y < y2[1]):
             if (min_x < x1[0]) & (max_x > x2[0]):
                 pass
-            corr_x = min_x
-            while True:
-                if (corr_x >= x1[0]):
-                    if (corr_x <= x1[1]) | (corr_x >= x2[1]):
-                        break
-                corr_x += 1
-            start_x = corr_x
-            while True:
-                if (corr_x >= x2[0]):
-                    if (corr_x <= x1[1]) | (corr_x >= x2[1]):
-                        break
-                corr_x += 1
-            if (corr_x != x2[0]):
+            else:
                 corr_x = min_x
-            end_x = corr_x
-            mat.append(end_x-start_x)
+                while True:
+                    if (corr_x >= x1[0]):
+                        if (corr_x <= x1[1]) | (corr_x >= x2[1]):
+                            break
+                    corr_x += 1
+                start_x = corr_x
+                while True:
+                    if (corr_x >= x2[0]):
+                        if (corr_x <= x1[1]) | (corr_x >= x2[1]):
+                            break
+                    corr_x += 1
+                if (corr_x != x2[0]):
+                    corr_x = min_x
+                end_x = corr_x
+                mat.append(end_x-start_x)
         else:
             mat.append(x2[0]-x1[0])
 print(len(mat)*max(mat))
