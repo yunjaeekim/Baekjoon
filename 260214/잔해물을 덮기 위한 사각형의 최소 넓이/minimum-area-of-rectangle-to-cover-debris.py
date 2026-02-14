@@ -5,11 +5,11 @@ x1[1], y1[1], x2[1], y2[1] = map(int, input().split())
 # Please write your code here.
 min_x, max_x, min_y, max_y = min(x1), max(x2), min(y1), max(y2)
 mat = []
-def possible(max, min, low_corr, high_corr):
-    if (min < low_corr[0]) & (max > high_corr[0]):
+def possible(max_corr, min_corr, low_corr, high_corr):
+    if (min_corr < low_corr[0]) & (max_corr > high_corr[0]):
         return False, 0
     else:
-        cur_corr = min
+        cur_corr = min_corr
         while True:
             if (cur_corr >= low_corr[0]):
                 if (cur_corr <= low_corr[1]) | (cur_corr >= high_corr[1]):
@@ -25,7 +25,8 @@ def possible(max, min, low_corr, high_corr):
         if cur_corr == high_corr[1]:
             cur_corr = low_corr[1]
         end_x = cur_corr
-        return True, end_x - start_x
+        value = end_x-start_x
+        return True, max(value, 0)
 
 x, y = [], []
 for curr_y in range(y1[0], y2[0]+1):
@@ -33,6 +34,8 @@ for curr_y in range(y1[0], y2[0]+1):
         flag, value = possible(max_x, min_x, x1, x2)
         if flag:
             x.append(value)
+        else:
+            x.append(0)
     else:
         x.append(x2[0]-x1[0])
         break
@@ -42,8 +45,9 @@ for curr_x in range(x1[0], x2[0]+1):
         flag, value = possible(max_y, min_y, y1, y2)
         if flag:
             y.append(value)
+        else:
+            y.append(0)
     else:
         y.append(y2[0]-y1[0])
         break
-
 print(max(y)*max(x))
