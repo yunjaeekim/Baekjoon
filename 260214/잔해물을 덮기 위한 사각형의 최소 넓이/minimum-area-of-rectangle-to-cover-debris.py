@@ -5,28 +5,45 @@ x1[1], y1[1], x2[1], y2[1] = map(int, input().split())
 # Please write your code here.
 min_x, max_x, min_y, max_y = min(x1), max(x2), min(y1), max(y2)
 mat = []
-for corr_y in range(min_y, max_y+1):
-    if (y1[0] <= corr_y < y2[0]):
-        if (y1[1] <= corr_y < y2[1]):
-            if (min_x < x1[0]) & (max_x > x2[0]):
-                pass
-            else:
-                corr_x = min_x
-                while True:
-                    if (corr_x >= x1[0]):
-                        if (corr_x <= x1[1]) | (corr_x >= x2[1]):
-                            break
-                    corr_x += 1
-                start_x = corr_x
-                while True:
-                    if (corr_x >= x2[0]):
-                        if (corr_x <= x1[1]) | (corr_x >= x2[1]):
-                            break
-                    corr_x += 1
-                if (corr_x != x2[0]):
-                    corr_x = min_x
-                end_x = corr_x
-                mat.append(end_x-start_x)
-        else:
-            mat.append(x2[0]-x1[0])
-print(len(mat)*max(mat))
+def possible(max, min, low_corr, high_corr):
+    if (min < low_corr[0]) & (max > high_corr[0]):
+        return False, 0
+    else:
+        cur_corr = min
+        while True:
+            if (cur_corr >= low_corr[0]):
+                if (cur_corr <= low_corr[1]) | (cur_corr >= high_corr[1]):
+                    break
+            cur_corr += 1
+        start_x = cur_corr
+
+        while True:
+            if (cur_corr >= high_corr[0]):
+                if (cur_corr <= low_corr[1]) | (cur_corr >= high_corr[1]):
+                    break
+            cur_corr += 1
+        if cur_corr == high_corr[1]:
+            cur_corr = low_corr[1]
+        end_x = cur_corr
+        return True, end_x - start_x
+
+x, y = [], []
+for curr_y in range(y1[0], y2[0]+1):
+    if (y1[1] <= curr_y <= y2[1]):
+        flag, value = possible(max_x, min_x, x1, x2)
+        if flag:
+            x.append(value)
+    else:
+        x.append(x2[0]-x1[0])
+        break
+
+for curr_x in range(x1[0], x2[0]+1):
+    if (x1[1] <= curr_x <= x2[1]):
+        flag, value = possible(max_y, min_y, y1, y2)
+        if flag:
+            y.append(value)
+    else:
+        y.append(y2[0]-y1[0])
+        break
+
+print(max(y)*max(x))
