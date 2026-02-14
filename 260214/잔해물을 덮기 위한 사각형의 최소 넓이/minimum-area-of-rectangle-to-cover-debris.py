@@ -20,6 +20,8 @@ for corr_y in range(min_y, max_y+1):
                     if (corr_x <= x1[1]) | (corr_x >= x2[1]):
                         break
                 corr_x += 1
+            if (corr_x != x2[0]):
+                corr_x = min_x
             end_x = corr_x
             mat.append(end_x-start_x)
         else:
