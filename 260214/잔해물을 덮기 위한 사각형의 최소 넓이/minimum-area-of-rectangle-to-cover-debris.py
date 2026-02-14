@@ -8,6 +8,8 @@ mat = []
 for corr_y in range(min_y, max_y+1):
     if (y1[0] <= corr_y < y2[0]):
         if (y1[1] <= corr_y < y2[1]):
+            if (min_x < x1[0]) & (max_x > x2[0]):
+                pass
             corr_x = min_x
             while True:
                 if (corr_x >= x1[0]):
