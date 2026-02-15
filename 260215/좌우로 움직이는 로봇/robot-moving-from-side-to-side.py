@@ -51,12 +51,13 @@ while True:
     A_pos, A_dis = walk(A_pos, A_dir, A_dis)
     B_pos, B_dis = walk(B_pos, B_dir, B_dis)
 
-    past, ans = check(past, A_pos, B_pos, ans)
-
     if (A_dis == 0) & (B_dis == 0) & (max(len(d), len(d_b)) == 0):
         break
 
+    past, ans = check(past, A_pos, B_pos, ans)
+
 print(ans)
+
 
 
 
