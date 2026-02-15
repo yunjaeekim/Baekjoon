@@ -17,44 +17,55 @@ for _ in range(m):
     d_b.append(direction)
 
 # Please write your code here.
-def check(past, A_pos, B_pos, ans):
-    if A_pos == B_pos:
-        if past:
-            return True, ans
+def make_arr(dir_arr, dis_arr):
+    arr, pos = [], 0
+    while len(dir_arr) > 0:
+        dir, dis = dir_arr.pop(0), dis_arr.pop(0)
+        if dir == 'R':
+            while dis > 0:
+                pos += 1
+                arr.append(pos)
+                dis -= 1
         else:
-            return True, ans + 1
-    else:
-        return False, ans
+            while dis > 0:
+                pos -= 1
+                arr.append(pos)
+                dis -= 1
+    return arr
 
-def walk(position, direction, distance):
-    if distance == 0:
-        return position, distance
-    if direction == 'R':
-        return position+1, distance-1
-    else:
-        return position-1, distance-1
+A_max, B_max = sum(t), sum(t_b)
+flag = A_max > B_max
 
-past, ans = True, 0
+A_pos, B_pos = 0, 0
+A_arr = make_arr(d, t)
+B_arr = make_arr(d_b, t_b)
 
-A_pos, B_pos = 500000, 500000
-A_dir, A_dis = d.pop(0), t.pop(0)
-B_dir, B_dis = d_b.pop(0), t_b.pop(0)
+time,ans = 0, 0
 
-while True:
-    if A_dis == 0:
-        if len(d) > 0:
-            A_dir, A_dis = d.pop(0), t.pop(0)
-    if B_dis == 0:
-        if len(d_b) > 0:
-            B_dir, B_dis = d_b.pop(0), t_b.pop(0)
-    
-    A_pos, A_dis = walk(A_pos, A_dir, A_dis)
-    B_pos, B_dis = walk(B_pos, B_dir, B_dis)
+if flag:
+    while time < A_max:
+        A_past, B_past = A_pos, B_pos
+        A_pos = A_arr[time]
+        if time < B_max:
+            B_pos = B_arr[time]
 
-    if (A_dis == 0) & (B_dis == 0) & (max(len(d), len(d_b)) == 0):
-        break
+        if A_pos == B_pos:
+            if A_past != B_past:
+                ans += 1
 
-    past, ans = check(past, A_pos, B_pos, ans)
+        time += 1
+else:
+    while time < B_max:
+        A_past, B_past = A_pos, B_pos
+        B_pos = B_arr[time]
+        if time < A_max:
+            A_pos = A_arr[time]
+        
+        if A_pos == B_pos:
+            if A_past != B_past:
+                ans += 1
+
+        time += 1
 
 print(ans)
 
