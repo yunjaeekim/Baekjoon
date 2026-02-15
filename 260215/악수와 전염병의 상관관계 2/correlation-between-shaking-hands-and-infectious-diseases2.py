@@ -7,15 +7,16 @@ ans[P-1] = 1
 handshakes = sorted(handshakes, key=lambda x:x[0])
 for (_, a, b) in handshakes:
     if (ans[a-1]==1) & (ans[b-1]==1):
-        pass
+        sh_cnt[a] += 1
+        sh_cnt[b] += 1
     
     if (ans[a-1]==1) & (ans[b-1]==0):
-        if sh_cnt[a] < 2:
+        if sh_cnt[a] < K:
             ans[b-1]=1
             sh_cnt[a] += 1
     
     if (ans[b-1]==1) & (ans[a-1]==0):
-        if sh_cnt[b] < 2:
+        if sh_cnt[b] < K:
             ans[a-1]=1
             sh_cnt[b] += 1
 
