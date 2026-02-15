@@ -34,17 +34,17 @@ def walk(position, direction, distance):
     else:
         return position-1, distance-1
 
-past, ans = False, 0
+past, ans = True, 0
 
 A_pos, B_pos = 500000, 500000
 A_dir, A_dis = d.pop(0), t.pop(0)
 B_dir, B_dis = d_b.pop(0), t_b.pop(0)
 
 while True:
-    if A_dis <= 0:
+    if A_dis == 0:
         if len(d) > 0:
             A_dir, A_dis = d.pop(0), t.pop(0)
-    if B_dis <= 0:
+    if B_dis == 0:
         if len(d_b) > 0:
             B_dir, B_dis = d_b.pop(0), t_b.pop(0)
     
