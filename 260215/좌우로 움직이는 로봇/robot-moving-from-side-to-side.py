@@ -1,74 +1,57 @@
 n, m = map(int, input().split())
 
-# Process robot A's movements
-t = []
-d = []
-for _ in range(n):
-    time, direction = input().split()
-    t.append(int(time))
-    d.append(direction)
+a_arr = []
+b_arr = []
 
-# Process robot B's movements
-t_b = []
-d_b = []
-for _ in range(m):
-    time, direction = input().split()
-    t_b.append(int(time))
-    d_b.append(direction)
+def move(arr, k):
+    state = 0
+    arr.append(state)
+    for _ in range(k):
+        t, d = input().split()
+        t = int(t)
 
-# Please write your code here.
-def make_arr(dir_arr, dis_arr):
-    arr, pos = [], 0
-    while len(dir_arr) > 0:
-        dir, dis = dir_arr.pop(0), dis_arr.pop(0)
-        if dir == 'R':
-            while dis > 0:
-                pos += 1
-                arr.append(pos)
-                dis -= 1
+        move = 0
+        if d == "R":
+            move = 1
         else:
-            while dis > 0:
-                pos -= 1
-                arr.append(pos)
-                dis -= 1
-    return arr
+            move = -1
 
-A_max, B_max = sum(t), sum(t_b)
-flag = A_max > B_max
+        while t > 0:
+            state += move
+            arr.append(state)
 
-A_pos, B_pos = 0, 0
-A_arr = make_arr(d, t)
-B_arr = make_arr(d_b, t_b)
+            t -= 1
 
-time,ans = 0, 0
+move(a_arr, n)
+move(b_arr, m)
 
-if flag:
-    while time < A_max:
+ans, time = 0,0
+A_pos, B_pos= 0,0
+A_time, B_time = len(a_arr), len(b_arr)
+max_time = max(A_time, B_time)
+
+if A_time > B_time:
+    while time < max_time:
         A_past, B_past = A_pos, B_pos
-        A_pos = A_arr[time]
-        if time < B_max:
-            B_pos = B_arr[time]
+        if time < B_time:
+            B_pos = b_arr[time]
+        A_pos = a_arr[time]
 
-        if A_pos == B_pos:
-            if A_past != B_past:
-                ans += 1
-
+        if (A_pos == B_pos) & (A_past != B_past):
+            ans += 1
+        
         time += 1
 else:
-    while time < B_max:
+    while time < max_time:
         A_past, B_past = A_pos, B_pos
-        B_pos = B_arr[time]
-        if time < A_max:
-            A_pos = A_arr[time]
-        
-        if A_pos == B_pos:
-            if A_past != B_past:
-                ans += 1
+        if time < A_time:
+            A_pos = a_arr[time]
+        B_pos = b_arr[time]
 
+        if (A_pos == B_pos) & (A_past != B_past):
+            ans += 1
+        
         time += 1
 
 print(ans)
-
-
-
 
