@@ -6,7 +6,7 @@ r, c = int(r), int(c)
 def change_direction(n,r,c):
     return (1<=r<=n) & (1<=c<=n)
 
-nx, ny = [-1,0,0,1], [0,-1,1,0]
+nx, ny = [-1,0,0,1], [0,1,-1,0]
 
 if d == 'L':
     idx = 0
@@ -19,9 +19,9 @@ else:
 
 
 for _ in range(t):
-    if change_direction(n, c+nx[idx], r+ny[idx]):
-        c += nx[idx]
+    if change_direction(n, r+ny[idx], c+nx[idx]):
         r += ny[idx]
+        c += nx[idx]
     else:
         idx = 3 - idx
 
