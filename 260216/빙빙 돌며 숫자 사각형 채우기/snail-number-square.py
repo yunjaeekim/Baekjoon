@@ -33,4 +33,5 @@ for i in range(2,n*m+1):
         c += nc
         arr[r-1][c-1] = str(i)
 
-print("\n".join([" ".join(row) for row in arr]))
+for i in range(n):
+    print(*arr[i])
