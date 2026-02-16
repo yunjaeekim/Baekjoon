@@ -10,10 +10,10 @@ elif n+1<=k<=2*n:   #왼쪽
     r,c = k%n,n
     nx,ny = 0,-1
 elif 2*n+1<=k<=3*n: #위
-    r,c = n, k%n
+    r,c = n, 3*n-k+1
     nx,ny = -1,0
 else:               #오른쪽
-    r,c = k%n, 1
+    r,c = 4*n-k+1, 1
     nx,ny = 0,1
 
 def in_range(n,r,c):
