@@ -4,7 +4,7 @@ r, c = int(r), int(c)
 
 # Please write your code here.
 def change_direction(n,r,c):
-    return (1<=r<=n) & (1<=r<=n)
+    return (1<=r<=n) & (1<=c<=n)
 
 nx, ny = [-1,0,0,1], [0,-1,1,0]
 
