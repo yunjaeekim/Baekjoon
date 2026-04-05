@@ -33,7 +33,10 @@ while cnt <= m*n:
     cnt += 1
 
 for row in grid:
-    print(*row)
+    for val in row:
+        print(val, end = ' ')
+    print()
 
 
     
+
