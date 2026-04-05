@@ -2,7 +2,7 @@ n, m = map(int, input().split())
 
 # Please write your code here.
 alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q',
-            'R','S','T','U','V','X','Y','Z']
+            'R','S','T','U','V','W','X','Y','Z']
 grid = [[-1 for _ in range(m)] for _ in range(n)]
 dir = [(1,0),(0,1),(-1,0),(0,-1)]
 cur_dir, x, y, cnt = 0,0,0,0
@@ -20,7 +20,7 @@ def is_keep(cur_dir,x,y):
 
 
 while cnt < n*m:
-    grid[y][x] = alphabet[cnt%25]
+    grid[y][x] = alphabet[cnt%26]
     cur_dir,x,y = is_keep(cur_dir,x,y)
     cnt += 1
 
