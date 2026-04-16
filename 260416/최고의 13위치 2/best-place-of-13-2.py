@@ -2,15 +2,30 @@ n = int(input())
 arr = [list(map(int, input().split())) for _ in range(n)]
 
 # Please write your code here.
-def cnt_pos(lst):
+def cnt_pos(lst,upper_lst):
     if len(lst) == 0:
         return 0
+
+    flag = len(upper_lst) == 0
+
     if len(lst) == 1:
-        return 1
+        if flag:
+            return 1
+
+        pos = lst[0]
+        for upp in upper_lst:
+            if abs(pos-upp) >2:
+                return 1
+        return 0
+    
     past = lst.pop()
     for pos in lst:
         if pos-past >2:
-            return 2
+            for upp in upper_lst:
+                if abs(pos-upp) >2:
+                    return 2
+            past = pos
+        past = pos
     return 1
 
 
@@ -26,12 +41,12 @@ for row in range(n):
         elif val == 1:
             lst_1.append(col+1)
     
-    ans[3] += cnt_pos(lst_3)
+    ans[3] += cnt_pos(lst_3,[])
 
     if ans[2] < 2:
-        ans[2] += cnt_pos(lst_2)
+        ans[2] += cnt_pos(lst_2,lst_3)
     if ans[1] < 2:
-        ans[1] += cnt_pos(lst_1)
+        ans[1] += cnt_pos(lst_1, lst_2+lst_3)
 
     if ans[3] >= 2:
         print(6)
