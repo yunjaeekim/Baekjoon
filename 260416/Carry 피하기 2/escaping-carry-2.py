@@ -39,5 +39,8 @@ for i in range(n-2):
                 if not is_carry(cand) and make_num(cand,N)>make_num(ans,N):
                     ans = cand
 
-print(make_num(ans,N))
-
+ans = make_num(ans,N)
+if ans == 0:
+    print(-1)
+else:
+    print(ans)
