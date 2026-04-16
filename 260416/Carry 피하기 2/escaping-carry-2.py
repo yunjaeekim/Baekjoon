@@ -27,13 +27,13 @@ def is_carry(lst):
 lst = [make_lst(num,N) for num in arr]
 ans = [0,0,0,0]
 
-for i in range(N-2):
+for i in range(n-2):
     first = lst[i]
-    for j in range(i+1,N-1):
+    for j in range(i+1,n-1):
         second = lst[j]
         fir_sec = [i+j for i,j in zip(first,second)]
         if not is_carry(fir_sec):
-            for k in range(j+1,N):
+            for k in range(j+1,n):
                 third = lst[k]
                 cand = [i+j for i,j in zip(fir_sec,third)]
                 if not is_carry(cand) and make_num(cand,N)>make_num(ans,N):
