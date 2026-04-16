@@ -1,3 +1,4 @@
+import sys
 n = int(input())
 arr = [list(map(int, input().split())) for _ in range(n)]
 
@@ -50,7 +51,7 @@ for row in range(n):
 
     if ans[3] >= 2:
         print(6)
-        break
+        sys.exit()
 
 def cal_score(score, num):
     if num == 0:
