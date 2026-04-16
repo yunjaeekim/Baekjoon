@@ -19,7 +19,7 @@ def cnt_pos(lst,upper_lst):
                 return 1
         return 0
     
-    past = lst.pop()
+    past = lst[0]
     for pos in lst:
         if pos-past >2:
             for upp in upper_lst:
@@ -33,14 +33,14 @@ def cnt_pos(lst,upper_lst):
 ans = {0:0, 1:0, 2:0, 3:0}
 for row in range(n):
     lst_1, lst_2, lst_3 = [], [], []
-    for col in range(n-2):
-        val = arr[row][col] + arr[row][col+1] + arr[row][col+2]
+    for col in range(1,n-1):
+        val = arr[row][col-1] + arr[row][col] + arr[row][col+1]
         if val == 3:
-            lst_3.append(col+1)
+            lst_3.append(col)
         elif val == 2:
-            lst_2.append(col+1)
+            lst_2.append(col)
         elif val == 1:
-            lst_1.append(col+1)
+            lst_1.append(col)
     
     ans[3] += cnt_pos(lst_3,[])
 
